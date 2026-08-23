@@ -1,0 +1,224 @@
+{
+  "prompt_only": {
+    "overall": {
+      "macro_f1": 0.6203703703703703,
+      "false_acceptance_rate": 0.2857142857142857,
+      "false_rejection_rate": 0.0,
+      "escalation_rate": 0.25,
+      "citation_accuracy": 1.0,
+      "remediation_accuracy": 0.3333333333333333,
+      "expected_calibration_error": 0.424,
+      "mean_latency_ms": 0.035219766868976876
+    },
+    "by_slice": {
+      "adversarial": {
+        "macro_f1": 0.6203703703703703,
+        "false_acceptance_rate": 0.2857142857142857,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.25,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 0.3333333333333333,
+        "expected_calibration_error": 0.424,
+        "mean_latency_ms": 0.009982600022340193
+      },
+      "long_context": {
+        "macro_f1": 0.6203703703703703,
+        "false_acceptance_rate": 0.2857142857142857,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.25,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 0.3333333333333333,
+        "expected_calibration_error": 0.424,
+        "mean_latency_ms": 0.1639771175784214
+      },
+      "low_resource": {
+        "macro_f1": 0.6203703703703703,
+        "false_acceptance_rate": 0.2857142857142857,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.25,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 0.3333333333333333,
+        "expected_calibration_error": 0.424,
+        "mean_latency_ms": 0.010521483394162109
+      },
+      "multilingual": {
+        "macro_f1": 0.6203703703703703,
+        "false_acceptance_rate": 0.2857142857142857,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.25,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 0.3333333333333333,
+        "expected_calibration_error": 0.424,
+        "mean_latency_ms": 0.008878466663494086
+      },
+      "policy_shift": {
+        "macro_f1": 0.6203703703703703,
+        "false_acceptance_rate": 0.2857142857142857,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.25,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 0.3333333333333333,
+        "expected_calibration_error": 0.424,
+        "mean_latency_ms": 0.008592350301720822
+      },
+      "standard": {
+        "macro_f1": 0.6203703703703703,
+        "false_acceptance_rate": 0.2857142857142857,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.25,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 0.3333333333333333,
+        "expected_calibration_error": 0.424,
+        "mean_latency_ms": 0.009366583253722638
+      }
+    }
+  },
+  "retrieved_policy": {
+    "overall": {
+      "macro_f1": 1.0,
+      "false_acceptance_rate": 0.0,
+      "false_rejection_rate": 0.0,
+      "escalation_rate": 0.35,
+      "citation_accuracy": 1.0,
+      "remediation_accuracy": 1.0,
+      "expected_calibration_error": 0.132,
+      "mean_latency_ms": 0.03513439466284277
+    },
+    "by_slice": {
+      "adversarial": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.009684067723962167
+      },
+      "long_context": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.16384726550313644
+      },
+      "low_resource": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.009120833662260944
+      },
+      "multilingual": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.008663200181520855
+      },
+      "policy_shift": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.008551433711545542
+      },
+      "standard": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.010939567194630703
+      }
+    }
+  },
+  "validated_policy": {
+    "overall": {
+      "macro_f1": 1.0,
+      "false_acceptance_rate": 0.0,
+      "false_rejection_rate": 0.0,
+      "escalation_rate": 0.35,
+      "citation_accuracy": 1.0,
+      "remediation_accuracy": 1.0,
+      "expected_calibration_error": 0.132,
+      "mean_latency_ms": 0.15429824484777377
+    },
+    "by_slice": {
+      "adversarial": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.024192399966220062
+      },
+      "long_context": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.8233999670968236
+      },
+      "low_resource": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.018379799924635638
+      },
+      "multilingual": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.020189668430248275
+      },
+      "policy_shift": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.01945548356161453
+      },
+      "standard": {
+        "macro_f1": 1.0,
+        "false_acceptance_rate": 0.0,
+        "false_rejection_rate": 0.0,
+        "escalation_rate": 0.35,
+        "citation_accuracy": 1.0,
+        "remediation_accuracy": 1.0,
+        "expected_calibration_error": 0.132,
+        "mean_latency_ms": 0.020172150107100606
+      }
+    }
+  }
+}
