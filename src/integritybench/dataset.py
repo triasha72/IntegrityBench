@@ -38,7 +38,9 @@ def build_cases() -> tuple[ModerationCase, ...]:
             for case_index in range(20):
                 rules = rules_for_version(version)
                 rule = rules[case_index % len(rules)]
-                language = LANGUAGES[case_index % len(LANGUAGES)] if slice_name == "multilingual" else "en"
+                language = (
+                    LANGUAGES[case_index % len(LANGUAGES)] if slice_name == "multilingual" else "en"
+                )
                 term = rule.terms[case_index % len(rule.terms)]
                 action = rule.action
                 if case_index % 5 == 4:
@@ -60,7 +62,9 @@ def build_cases() -> tuple[ModerationCase, ...]:
                         expected_decision=action,
                         expected_rule_id=rule_id,
                         expected_remediation=remediation,
-                        label_budget=(8, 32, 128, 256)[case_index % 4] if slice_name == "low_resource" else None,
+                        label_budget=(8, 32, 128, 256)[case_index % 4]
+                        if slice_name == "low_resource"
+                        else None,
                     )
                 )
     if len(cases) != 360 or len({case.case_id for case in cases}) != 360:

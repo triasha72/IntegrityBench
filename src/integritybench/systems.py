@@ -19,7 +19,9 @@ def _matches(rule: PolicyRule, content: str) -> bool:
     return any(normalize(term) in normalized for term in rule.terms)
 
 
-def _result(rule: PolicyRule | None, *, started: float, evidence: Sequence[str]) -> ModerationResult:
+def _result(
+    rule: PolicyRule | None, *, started: float, evidence: Sequence[str]
+) -> ModerationResult:
     if rule is None:
         return ModerationResult(
             decision=Decision.ALLOW,
@@ -50,7 +52,9 @@ class PromptOnlySystem:
 
     def decide(self, case: ModerationCase) -> ModerationResult:
         started = time.perf_counter()
-        match = next((rule for rule in rules_for_version("v1") if _matches(rule, case.content)), None)
+        match = next(
+            (rule for rule in rules_for_version("v1") if _matches(rule, case.content)), None
+        )
         return _result(match, started=started, evidence=())
 
 
@@ -62,7 +66,11 @@ class RetrievedPolicySystem:
     def decide(self, case: ModerationCase) -> ModerationResult:
         started = time.perf_counter()
         match = next(
-            (rule for rule in rules_for_version(case.policy_version) if _matches(rule, case.content)),
+            (
+                rule
+                for rule in rules_for_version(case.policy_version)
+                if _matches(rule, case.content)
+            ),
             None,
         )
         return _result(match, started=started, evidence=() if match is None else (match.text,))

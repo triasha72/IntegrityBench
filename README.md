@@ -27,6 +27,7 @@ are controls, not substitutes for the later LLM/RAG/LoRA experiment.
 ```bash
 python -m pip install -e ".[dev]"
 python scripts/build_benchmark.py
+python scripts/build_annotation_pack.py
 python scripts/run_benchmark.py
 pytest
 ```
@@ -48,3 +49,15 @@ macro F1 with no false acceptances or false rejections. This large gap is a
 construction check: the dataset was designed so that policy version changes the
 correct action. It shows that the evaluator detects stale-policy behavior. It
 does not estimate performance on real moderation traffic.
+
+## Human-review phase
+
+The v0.2 protocol samples 120 blinded cases, balanced across all six slices,
+for two independent annotators. The annotation guide defines evidence,
+escalation, ambiguity, and adjudication rules; the agreement script compares
+decision and policy-rule labels without exposing the deterministic v0.1 answer
+key during review.
+
+No human-agreement number is claimed yet. That result will be published only
+after both annotation files are complete and disagreements have been
+adjudicated. See `docs/annotation-guide.md` for the protocol.

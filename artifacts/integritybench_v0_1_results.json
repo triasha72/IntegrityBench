@@ -7,8 +7,7 @@
       "escalation_rate": 0.25,
       "citation_accuracy": 1.0,
       "remediation_accuracy": 0.3333333333333333,
-      "expected_calibration_error": 0.424,
-      "mean_latency_ms": 0.035219766868976876
+      "expected_calibration_error": 0.424
     },
     "by_slice": {
       "adversarial": {
@@ -18,8 +17,7 @@
         "escalation_rate": 0.25,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 0.3333333333333333,
-        "expected_calibration_error": 0.424,
-        "mean_latency_ms": 0.009982600022340193
+        "expected_calibration_error": 0.424
       },
       "long_context": {
         "macro_f1": 0.6203703703703703,
@@ -28,8 +26,7 @@
         "escalation_rate": 0.25,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 0.3333333333333333,
-        "expected_calibration_error": 0.424,
-        "mean_latency_ms": 0.1639771175784214
+        "expected_calibration_error": 0.424
       },
       "low_resource": {
         "macro_f1": 0.6203703703703703,
@@ -38,8 +35,7 @@
         "escalation_rate": 0.25,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 0.3333333333333333,
-        "expected_calibration_error": 0.424,
-        "mean_latency_ms": 0.010521483394162109
+        "expected_calibration_error": 0.424
       },
       "multilingual": {
         "macro_f1": 0.6203703703703703,
@@ -48,8 +44,7 @@
         "escalation_rate": 0.25,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 0.3333333333333333,
-        "expected_calibration_error": 0.424,
-        "mean_latency_ms": 0.008878466663494086
+        "expected_calibration_error": 0.424
       },
       "policy_shift": {
         "macro_f1": 0.6203703703703703,
@@ -58,8 +53,7 @@
         "escalation_rate": 0.25,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 0.3333333333333333,
-        "expected_calibration_error": 0.424,
-        "mean_latency_ms": 0.008592350301720822
+        "expected_calibration_error": 0.424
       },
       "standard": {
         "macro_f1": 0.6203703703703703,
@@ -68,8 +62,7 @@
         "escalation_rate": 0.25,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 0.3333333333333333,
-        "expected_calibration_error": 0.424,
-        "mean_latency_ms": 0.009366583253722638
+        "expected_calibration_error": 0.424
       }
     }
   },
@@ -81,8 +74,7 @@
       "escalation_rate": 0.35,
       "citation_accuracy": 1.0,
       "remediation_accuracy": 1.0,
-      "expected_calibration_error": 0.132,
-      "mean_latency_ms": 0.03513439466284277
+      "expected_calibration_error": 0.132
     },
     "by_slice": {
       "adversarial": {
@@ -92,8 +84,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.009684067723962167
+        "expected_calibration_error": 0.132
       },
       "long_context": {
         "macro_f1": 1.0,
@@ -102,8 +93,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.16384726550313644
+        "expected_calibration_error": 0.132
       },
       "low_resource": {
         "macro_f1": 1.0,
@@ -112,8 +102,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.009120833662260944
+        "expected_calibration_error": 0.132
       },
       "multilingual": {
         "macro_f1": 1.0,
@@ -122,8 +111,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.008663200181520855
+        "expected_calibration_error": 0.132
       },
       "policy_shift": {
         "macro_f1": 1.0,
@@ -132,8 +120,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.008551433711545542
+        "expected_calibration_error": 0.132
       },
       "standard": {
         "macro_f1": 1.0,
@@ -142,8 +129,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.010939567194630703
+        "expected_calibration_error": 0.132
       }
     }
   },
@@ -155,8 +141,7 @@
       "escalation_rate": 0.35,
       "citation_accuracy": 1.0,
       "remediation_accuracy": 1.0,
-      "expected_calibration_error": 0.132,
-      "mean_latency_ms": 0.15429824484777377
+      "expected_calibration_error": 0.132
     },
     "by_slice": {
       "adversarial": {
@@ -166,8 +151,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.024192399966220062
+        "expected_calibration_error": 0.132
       },
       "long_context": {
         "macro_f1": 1.0,
@@ -176,8 +160,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.8233999670968236
+        "expected_calibration_error": 0.132
       },
       "low_resource": {
         "macro_f1": 1.0,
@@ -186,8 +169,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.018379799924635638
+        "expected_calibration_error": 0.132
       },
       "multilingual": {
         "macro_f1": 1.0,
@@ -196,8 +178,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.020189668430248275
+        "expected_calibration_error": 0.132
       },
       "policy_shift": {
         "macro_f1": 1.0,
@@ -206,8 +187,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.01945548356161453
+        "expected_calibration_error": 0.132
       },
       "standard": {
         "macro_f1": 1.0,
@@ -216,8 +196,7 @@
         "escalation_rate": 0.35,
         "citation_accuracy": 1.0,
         "remediation_accuracy": 1.0,
-        "expected_calibration_error": 0.132,
-        "mean_latency_ms": 0.020172150107100606
+        "expected_calibration_error": 0.132
       }
     }
   }
