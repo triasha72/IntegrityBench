@@ -1,5 +1,7 @@
 # IntegrityBench
 
+[Portfolio case study](https://triasha72.github.io/Portfolio/case-integritybench.html)
+
 IntegrityBench asks a narrow question: can a moderation system follow the policy
 that applies now, explain its decision, and know when a person should review the
 case?
