@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import pytest
 
 from integritybench.civil_comments import CivilCommentsConfig, decision_from_toxicity, sample_rows
@@ -27,3 +30,19 @@ def test_calibration_error_is_zero_for_correct_certain_predictions():
         )
         == 0.0
     )
+
+
+def test_published_real_data_artifact_keeps_safety_evidence():
+    artifact = json.loads(
+        (Path(__file__).parents[1] / "artifacts/civil_comments_baseline_v1.json").read_text()
+    )
+    assert artifact["dataset_id"] == "google/civil_comments"
+    assert artifact["contains_source_text"] is False
+    test = artifact["evaluations"]["test"]
+    assert test["rows"] == 97_320
+    assert {
+        "false_acceptance_rate",
+        "false_rejection_rate",
+        "expected_calibration_error",
+    } <= test.keys()
+    assert {"threat", "identity_attack", "sexual_explicit"} <= test["safety_slices"].keys()
