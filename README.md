@@ -2,9 +2,42 @@
 
 [Portfolio case study](https://triasha72.github.io/Portfolio/case-integritybench.html)
 
-IntegrityBench asks a narrow question: can a moderation system follow the policy
-that applies now, explain its decision, and know when a person should review the
-case?
+IntegrityBench started with a practical moderation question: can a system apply
+the policy that is active now, explain why it made a decision, and recognize
+when a person needs to step in?
+
+The project now covers both evaluation and deployment. Its main model is trained
+on Google's public Civil Comments dataset. The generated policy-shift cases are
+still useful for testing rule changes, but I keep those results separate from
+the real-data results.
+
+Accuracy is only part of the story here. Allowing a threat is much more serious
+than sending an ambiguous comment to review, so the release checks include
+false acceptance, false rejection, calibration, threat performance, and the
+rate at which work is passed to a person.
+
+## Project story
+
+**Situation.** A moderation model can look accurate while still allowing a
+dangerous share of harmful comments. Policies also change, and some comments are
+too ambiguous for an automatic decision.
+
+**Task.** I set out to build an evaluation and release process that treats those
+risks separately. The system needed to follow the current policy, reserve
+uncertain cases for people, and prevent a weak model from reaching production.
+
+**Action.** I created versioned policy tests, then trained a class-balanced
+TF-IDF and logistic-regression baseline on public Civil Comments data. I chose
+decision thresholds on validation data, kept the full test set protected, and
+added calibration and threat-specific gates. I also built a fail-closed FastAPI
+service, a checksummed model registry, review and shadow paths, rollback, load
+testing, telemetry hooks, and an AWS deployment plan.
+
+**Result.** On 97,320 held-out comments, the thresholded candidate cut false
+acceptance from `11.43%` to `1.84%`. It still failed release review because
+threat false acceptance was `6.05%` and decision calibration error was `5.31%`.
+The most important result is therefore the blocked release: the process caught
+a model that improved overall safety but was not ready for real moderation.
 
 The benchmark contains 360 deterministic cases across standard, policy-shift,
 long-context, multilingual, adversarial, and low-resource slices. Policy rules
@@ -165,3 +198,20 @@ With no approved model, `/health` remains available while `/ready` and
 `/v1/moderate` fail closed. This is the expected state of the repository today:
 both measured candidates are rejected, so neither is quietly presented as a
 production moderator.
+
+## Cloud and operations path
+
+The AWS reference deployment uses App Runner for the API, a private versioned
+S3 bucket for registry and model objects, and DynamoDB for review metadata.
+Terraform also sets least-privilege runtime access, autoscaling limits, health
+checks, and a 5xx alarm. The CI job validates Terraform and builds the container;
+the manual cloud workflow creates a reviewable plan but never applies it.
+
+`scripts/canary_check.py` compares stable and canary services on a supplied real
+shadow sample without saving comments. `scripts/load_test.py` reports success
+rate and P50/P95/P99 latency. Deployment steps, rollback triggers, privacy rules,
+incident exercises, and cost inputs are in `docs/production-runbook.md`.
+
+No AWS deployment, uptime, latency, or cost claim is made from this code alone.
+Those results require an account, an approved model, a named environment, and
+retained monitoring evidence.
