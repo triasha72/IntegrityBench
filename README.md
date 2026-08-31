@@ -84,10 +84,21 @@ Model choices were checked on 20,000 validation rows, then evaluated on all
 | ALLOW F1 | 0.8010 |
 | ESCALATE F1 | 0.3946 |
 | REJECT F1 | 0.5433 |
+| False acceptance rate | 0.1143 |
+| False rejection rate | 0.0247 |
+| Expected calibration error | 0.0158 |
 
 The weak escalation score is retained as a real limitation rather than hidden
 by binary relabeling. The checksummed, text-free experiment record is at
 `artifacts/civil_comments_baseline_v1.json`; source comments are not committed.
+
+Safety-attribute slices are also reported for comments with source annotation
+scores of at least 0.50. False acceptance was 0.1746 on obscene content, 0.2279
+on threats, 0.0929 on insults, 0.0837 on identity attacks, and 0.2066 on
+sexually explicit content. These failures show why this lexical baseline must
+not be used as a production moderator. The distributed Hugging Face schema does
+not include demographic identity-membership columns, so these are content-type
+slices rather than demographic fairness claims.
 
 Reproduce with:
 
