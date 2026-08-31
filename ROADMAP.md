@@ -24,10 +24,11 @@ for real comments.
 
 ## The next experiment
 
-The next model should be a compact transformer trained on exactly the same
-public data and judged by the same release gates. The comparison should not be
-limited to macro F1; the main question is whether it lowers threat false
-acceptance without creating an unreasonable review burden.
+The compact-transformer training path is now implemented for exactly the same
+public data and release gates. It still needs a real GPU run and a checked-in
+experiment record. The comparison will not be limited to macro F1; the main
+question is whether it lowers threat false acceptance without creating an
+unreasonable review burden.
 
 After that, two people need to annotate the blinded review set independently.
 Agreement and adjudication will show whether the policy labels themselves are

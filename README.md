@@ -97,6 +97,17 @@ No human-agreement number is claimed yet. That result will be published only
 after both annotation files are complete and disagreements have been
 adjudicated. See `docs/annotation-guide.md` for the protocol.
 
+## Transformer comparison
+
+`scripts/train_civil_comments_transformer.py` fine-tunes a compact Hugging Face
+classifier on the same public rows, labels, and protected test split as the
+lexical candidate. It also uses the same validation-only threshold search and
+release policy, so the more complex model does not get an easier test.
+
+The training path is ready, but it has not produced a checked-in GPU experiment
+record. No transformer result is claimed until that run finishes and the
+text-free artifact passes the existing release gates.
+
 ## Real-data result: Civil Comments
 
 IntegrityBench now includes a separate real-world track using the CC0

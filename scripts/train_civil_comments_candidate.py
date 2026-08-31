@@ -22,12 +22,21 @@ from integritybench.thresholds import (
     select_thresholds,
     threshold_predictions,
 )
-from scripts.train_civil_comments_baseline import (
-    LABELS,
-    SAFETY_ATTRIBUTES,
-    digest,
-    read_split,
-)
+
+try:
+    from .train_civil_comments_baseline import (
+        LABELS,
+        SAFETY_ATTRIBUTES,
+        digest,
+        read_split,
+    )
+except ImportError:  # Direct execution: python scripts/train_civil_comments_candidate.py
+    from train_civil_comments_baseline import (
+        LABELS,
+        SAFETY_ATTRIBUTES,
+        digest,
+        read_split,
+    )
 
 
 def decision_calibration_error(expected, predicted, probabilities, bins: int = 10) -> float:
