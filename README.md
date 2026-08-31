@@ -134,3 +134,34 @@ python3 scripts/train_civil_comments_baseline.py \
   --validation data/external/validation-00000-of-00001.parquet \
   --test data/external/test-00000-of-00001.parquet
 ```
+
+## From experiment to service
+
+The repository now includes the parts needed to move an approved model into a
+small production service without bypassing the safety evidence:
+
+- `model-candidate.yml` downloads the public Civil Comments files, trains a
+  candidate, applies the frozen release policy, and uploads a short-lived model
+  package. It never promotes a model automatically.
+- `ModelRegistry` records candidate versions, verifies model hashes, refuses a
+  rejected release assessment, and keeps the previous production version for
+  rollback.
+- The FastAPI service returns 503 until the registry names an approved
+  production model. It validates request size, reports model version and
+  latency, and sends `ESCALATE` decisions to a review queue.
+- The local review queue stores a restricted content reference rather than the
+  comment text. Shadow comparisons retain only aggregate decision transitions.
+
+Run the service locally:
+
+```bash
+python -m pip install -e ".[api,real-data]"
+export INTEGRITYBENCH_REGISTRY=deploy/registry.json
+export INTEGRITYBENCH_REVIEW_DB=artifacts/local/reviews.sqlite
+uvicorn integritybench.bootstrap:app --host 0.0.0.0 --port 8000
+```
+
+With no approved model, `/health` remains available while `/ready` and
+`/v1/moderate` fail closed. This is the expected state of the repository today:
+both measured candidates are rejected, so neither is quietly presented as a
+production moderator.

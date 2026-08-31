@@ -1,0 +1,41 @@
+name: Build real-data model candidate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[real-data]"
+      - name: Download pinned public Civil Comments files
+        run: python scripts/download_civil_comments.py data/external/civil-comments
+      - name: Train candidate and select thresholds on validation only
+        run: |
+          python scripts/train_civil_comments_candidate.py \
+            --train data/external/civil-comments/train.parquet \
+            --validation data/external/civil-comments/validation.parquet \
+            --test data/external/civil-comments/test.parquet \
+            --output artifacts/candidate.json \
+            --model-output artifacts/candidate.joblib
+      - name: Apply frozen release policy
+        run: |
+          python scripts/assess_civil_comments_release.py \
+            artifacts/candidate.json artifacts/release-assessment.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: integritybench-candidate-${{ github.sha }}
+          path: |
+            artifacts/candidate.json
+            artifacts/candidate.joblib
+            artifacts/release-assessment.json
+            data/external/civil-comments/manifest.json
+          retention-days: 30

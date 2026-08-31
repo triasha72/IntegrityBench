@@ -17,6 +17,10 @@ transformer = [
   "torch>=2.4,<3",
   "transformers>=4.45,<6",
 ]
+api = ["fastapi>=0.115,<1", "httpx>=0.27,<1", "uvicorn>=0.30,<1"]
+
+[project.scripts]
+integritybench-registry = "integritybench.registry_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
