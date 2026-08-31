@@ -23,3 +23,10 @@ jobs:
           python scripts/build_annotation_pack.py
           python scripts/run_benchmark.py
           git diff --exit-code -- data/ artifacts/
+      - name: Revalidate real-model release decision
+        run: |
+          python scripts/assess_civil_comments_release.py \
+            artifacts/civil_comments_baseline_v1.json \
+            /tmp/civil_comments_release_assessment.json
+          diff -u artifacts/civil_comments_release_assessment_v1.json \
+            /tmp/civil_comments_release_assessment.json

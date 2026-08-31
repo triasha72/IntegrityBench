@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "policy": "civil-comments-release-v1",
+  "decision": "rejected",
+  "checks": {
+    "overall_false_acceptance_rate": {
+      "value": 0.11431143114311432,
+      "maximum": 0.05,
+      "passed": false
+    },
+    "overall_false_rejection_rate": {
+      "value": 0.024710323033707866,
+      "maximum": 0.05,
+      "passed": true
+    },
+    "expected_calibration_error": {
+      "value": 0.015785315891111696,
+      "maximum": 0.05,
+      "passed": true
+    },
+    "threat_false_acceptance_rate": {
+      "value": 0.22790697674418606,
+      "maximum": 0.05,
+      "passed": false
+    },
+    "identity_attack_false_acceptance_rate": {
+      "value": 0.08372827804107424,
+      "maximum": 0.05,
+      "passed": false
+    },
+    "sexual_explicit_false_acceptance_rate": {
+      "value": 0.20657276995305165,
+      "maximum": 0.05,
+      "passed": false
+    }
+  },
+  "required_runtime_monitoring": {
+    "decision_distribution_psi_warning": 0.1,
+    "decision_distribution_psi_block": 0.25
+  },
+  "limitations": [
+    "Approval would apply only to the documented Civil Comments mapping.",
+    "A production launch also requires human review and live shadow evaluation."
+  ]
+}

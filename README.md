@@ -100,6 +100,15 @@ not be used as a production moderator. The distributed Hugging Face schema does
 not include demographic identity-membership columns, so these are content-type
 slices rather than demographic fairness claims.
 
+The frozen release policy rejects this baseline: overall and slice false
+acceptance must each be at most 5%, while calibration error and false rejection
+must also remain at most 5%. The current model fails overall false acceptance
+and the threat, identity-attack, and sexual-explicit gates. The tracked decision
+is `artifacts/civil_comments_release_assessment_v1.json`; CI regenerates it so a
+metric or policy change cannot silently convert a research result into an
+approved deployment. Runtime monitoring uses decision-distribution PSI warning
+and blocking thresholds of 0.10 and 0.25.
+
 Reproduce with:
 
 ```bash
