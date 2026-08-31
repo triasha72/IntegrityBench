@@ -11,6 +11,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.6,<1"]
+real-data = ["pyarrow>=17,<22", "scikit-learn>=1.5,<2"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -63,3 +63,38 @@ key during review.
 No human-agreement number is claimed yet. That result will be published only
 after both annotation files are complete and disagreements have been
 adjudicated. See `docs/annotation-guide.md` for the protocol.
+
+## Real-data result: Civil Comments
+
+IntegrityBench now includes a separate real-world track using the CC0
+`google/civil_comments` dataset. Crowd toxicity scores map to `ALLOW` at or
+below 0.10, `REJECT` at or above 0.50, and `ESCALATE` in the ambiguous middle
+band. This track does not replace the generated policy-shift control because
+Civil Comments has no versioned policy labels.
+
+A TF-IDF bigram plus class-balanced logistic-regression baseline was trained on
+a deterministic 100,000-row sample from the first published training shard.
+Model choices were checked on 20,000 validation rows, then evaluated on all
+97,320 test rows.
+
+| Test metric | Result |
+|---|---:|
+| Accuracy | 0.6803 |
+| Macro F1 | 0.5796 |
+| ALLOW F1 | 0.8010 |
+| ESCALATE F1 | 0.3946 |
+| REJECT F1 | 0.5433 |
+
+The weak escalation score is retained as a real limitation rather than hidden
+by binary relabeling. The checksummed, text-free experiment record is at
+`artifacts/civil_comments_baseline_v1.json`; source comments are not committed.
+
+Reproduce with:
+
+```bash
+python3 -m pip install -e ".[real-data]"
+python3 scripts/train_civil_comments_baseline.py \
+  --train data/external/train-00000-of-00002.parquet \
+  --validation data/external/validation-00000-of-00001.parquet \
+  --test data/external/test-00000-of-00001.parquet
+```

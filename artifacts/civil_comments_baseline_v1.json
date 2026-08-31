@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "google/civil_comments",
+  "dataset_license": "CC0-1.0",
+  "model": "TF-IDF bigrams + class-balanced logistic regression",
+  "label_mapping": {
+    "allow_max": 0.1,
+    "reject_min": 0.5
+  },
+  "seed": 42,
+  "training_rows": 100000,
+  "source_sha256": {
+    "train": "c20f01c3aecbdd942886cacb0ee67e995df33bc712a622fde75927ed3d6ccefe",
+    "validation": "2e0eb65474e7e1290df8689fc93eea783160c898c09ae15382c0a9662367bd03",
+    "test": "410f803ff161e7c4ba005db7de5b444cac413f4861bf056b0fd69d670d75aa08"
+  },
+  "evaluations": {
+    "validation": {
+      "rows": 20000,
+      "classification_report": {
+        "ALLOW": {
+          "precision": 0.8474378881987578,
+          "recall": 0.7703980801806889,
+          "f1-score": 0.807083703046436,
+          "support": 14168.0
+        },
+        "ESCALATE": {
+          "precision": 0.3539505940033943,
+          "recall": 0.44258429615656686,
+          "f1-score": 0.39333612740989105,
+          "support": 4241.0
+        },
+        "REJECT": {
+          "precision": 0.4991744634012108,
+          "recall": 0.5700817096165933,
+          "f1-score": 0.5322769953051644,
+          "support": 1591.0
+        },
+        "accuracy": 0.68495,
+        "macro avg": {
+          "precision": 0.566854315201121,
+          "recall": 0.5943546953179497,
+          "f1-score": 0.5775656085871638,
+          "support": 20000.0
+        },
+        "weighted avg": {
+          "precision": 0.715089552021986,
+          "recall": 0.68495,
+          "f1-score": 0.6974876560318884,
+          "support": 20000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          10915,
+          2922,
+          331
+        ],
+        [
+          1785,
+          1877,
+          579
+        ],
+        [
+          180,
+          504,
+          907
+        ]
+      ]
+    },
+    "test": {
+      "rows": 97320,
+      "classification_report": {
+        "ALLOW": {
+          "precision": 0.8397240494144071,
+          "recall": 0.7657420411985019,
+          "f1-score": 0.8010284507430251,
+          "support": 68352.0
+        },
+        "ESCALATE": {
+          "precision": 0.35848401896904036,
+          "recall": 0.4387711764428295,
+          "f1-score": 0.3945849601086403,
+          "support": 21191.0
+        },
+        "REJECT": {
+          "precision": 0.5050259582458854,
+          "recall": 0.5878873601645879,
+          "f1-score": 0.5433155080213904,
+          "support": 7777.0
+        },
+        "accuracy": 0.6803329223181258,
+        "macro avg": {
+          "precision": 0.5677446755431109,
+          "recall": 0.5974668592686397,
+          "f1-score": 0.5796429729576853,
+          "support": 97320.0
+        },
+        "weighted avg": {
+          "precision": 0.7081898885000488,
+          "recall": 0.6803329223181258,
+          "f1-score": 0.691932914721864,
+          "support": 97320.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          52340,
+          14323,
+          1689
+        ],
+        [
+          9101,
+          9298,
+          2792
+        ],
+        [
+          889,
+          2316,
+          4572
+        ]
+      ]
+    }
+  },
+  "contains_source_text": false,
+  "limitations": [
+    "Lexical baseline only; not a production moderation system.",
+    "Training uses a deterministic sample from the first published training shard."
+  ]
+}
