@@ -1,0 +1,29 @@
+name: Experiment proposal
+description: Plan a model or evaluation change before looking at protected results.
+title: "experiment: "
+labels: ["experiment"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What decision should this experiment help us make?
+    validations: {required: true}
+  - type: textarea
+    id: data
+    attributes:
+      label: Data and split boundary
+      description: Name the public dataset, license, version, and protected split.
+    validations: {required: true}
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics and release limits
+      description: Include false acceptance, calibration, safety slices, and review load where relevant.
+    validations: {required: true}
+  - type: textarea
+    id: stop
+    attributes:
+      label: Stop condition and compute
+      description: State the seed plan, budget, stopping rule, and required hardware.
+    validations: {required: true}
