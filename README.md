@@ -109,6 +109,22 @@ metric or policy change cannot silently convert a research result into an
 approved deployment. Runtime monitoring uses decision-distribution PSI warning
 and blocking thresholds of 0.10 and 0.25.
 
+### Safety-thresholded candidate
+
+A second measured candidate uses character n-grams for greater robustness to
+spelling variation and selects allow/reject thresholds exclusively on validation
+data under stricter 2.5% false-acceptance constraints. On the protected test it
+reduced overall false acceptance from `0.1143` to `0.0184` and false rejection
+from `0.0247` to `0.0171`. This came with a large operational cost: `48.1%` of
+test comments were escalated and macro F1 fell to `0.5605`. Threat false
+acceptance was `0.0605` and decision ECE was `0.0531`, narrowly failing the
+frozen 5% release limits. The release gate therefore correctly rejects it.
+
+The result is tracked at `artifacts/civil_comments_candidate_v2.json`. The
+serialized model is deliberately excluded from Git because its learned
+vocabulary is derived from source text; deployment packages must be placed in
+access-controlled artifact storage and verified by the recorded SHA-256.
+
 Reproduce with:
 
 ```bash

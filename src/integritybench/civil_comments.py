@@ -28,7 +28,9 @@ class CivilCommentsConfig:
             raise ValueError("Expected 0 <= allow_max < reject_min <= 1")
 
 
-def decision_from_toxicity(score: float, allow_max: float = 0.10, reject_min: float = 0.50) -> Decision:
+def decision_from_toxicity(
+    score: float, allow_max: float = 0.10, reject_min: float = 0.50
+) -> Decision:
     if not 0 <= score <= 1:
         raise ValueError("toxicity must be between zero and one")
     if score <= allow_max:
@@ -57,7 +59,9 @@ def row_to_case(row: Mapping[str, Any], split: str, index: int) -> ModerationCas
     )
 
 
-def sample_rows(rows: Iterable[Mapping[str, Any]], config: CivilCommentsConfig) -> tuple[ModerationCase, ...]:
+def sample_rows(
+    rows: Iterable[Mapping[str, Any]], config: CivilCommentsConfig
+) -> tuple[ModerationCase, ...]:
     rng = random.Random(config.seed)
     reservoir: list[tuple[int, Mapping[str, Any]]] = []
     for index, row in enumerate(rows):

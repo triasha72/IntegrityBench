@@ -46,3 +46,12 @@ def test_published_real_data_artifact_keeps_safety_evidence():
         "expected_calibration_error",
     } <= test.keys()
     assert {"threat", "identity_attack", "sexual_explicit"} <= test["safety_slices"].keys()
+
+
+def test_safety_thresholded_candidate_remains_honestly_rejected():
+    root = Path(__file__).parents[1]
+    candidate = json.loads((root / "artifacts/civil_comments_candidate_v2.json").read_text())
+    release = json.loads((root / "artifacts/civil_comments_candidate_release_v2.json").read_text())
+    assert candidate["evaluations"]["test"]["false_acceptance_rate"] < 0.05
+    assert candidate["evaluations"]["test"]["escalation_rate"] > 0.45
+    assert release["decision"] == "rejected"

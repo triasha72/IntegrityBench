@@ -30,3 +30,8 @@ jobs:
             /tmp/civil_comments_release_assessment.json
           diff -u artifacts/civil_comments_release_assessment_v1.json \
             /tmp/civil_comments_release_assessment.json
+          python scripts/assess_civil_comments_release.py \
+            artifacts/civil_comments_candidate_v2.json \
+            /tmp/civil_comments_candidate_release.json
+          diff -u artifacts/civil_comments_candidate_release_v2.json \
+            /tmp/civil_comments_candidate_release.json
