@@ -18,6 +18,12 @@ transformer = [
   "transformers>=4.45,<6",
 ]
 api = ["fastapi>=0.115,<1", "httpx>=0.27,<1", "uvicorn>=0.30,<1"]
+cloud = ["boto3>=1.35,<2"]
+observability = [
+  "opentelemetry-exporter-otlp>=1.27,<2",
+  "opentelemetry-instrumentation-fastapi>=0.48b0,<1",
+  "opentelemetry-sdk>=1.27,<2",
+]
 
 [project.scripts]
 integritybench-registry = "integritybench.registry_cli:main"
@@ -26,6 +32,7 @@ integritybench-registry = "integritybench.registry_cli:main"
 where = ["src"]
 
 [tool.pytest.ini_options]
+pythonpath = ["."]
 testpaths = ["tests"]
 
 [tool.ruff]

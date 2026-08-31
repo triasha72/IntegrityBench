@@ -4,7 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY src ./src
-RUN python -m pip install --no-cache-dir ".[api,real-data]"
+RUN python -m pip install --no-cache-dir ".[api,cloud,observability,real-data]"
 RUN useradd --create-home --uid 10001 appuser
 USER appuser
 EXPOSE 8000

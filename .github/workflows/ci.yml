@@ -35,3 +35,12 @@ jobs:
             /tmp/civil_comments_candidate_release.json
           diff -u artifacts/civil_comments_candidate_release_v2.json \
             /tmp/civil_comments_candidate_release.json
+  container-and-infra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t integritybench:${{ github.sha }} .
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform -chdir=infra/terraform fmt -check
+      - run: terraform -chdir=infra/terraform init -backend=false
+      - run: terraform -chdir=infra/terraform validate
