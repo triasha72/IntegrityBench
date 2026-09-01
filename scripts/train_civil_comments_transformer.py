@@ -96,9 +96,7 @@ def main() -> int:
             return len(self.text)
 
         def __getitem__(self, index):
-            encoded = tokenizer(
-                self.text[index], truncation=True, max_length=args.max_length
-            )
+            encoded = tokenizer(self.text[index], truncation=True, max_length=args.max_length)
             encoded["labels"] = self.labels[index]
             return encoded
 
@@ -142,10 +140,7 @@ def main() -> int:
     thresholds, selection = select_thresholds(
         validation.label.tolist(),
         validation_probabilities,
-        {
-            attribute: validation[attribute].to_numpy() >= 0.5
-            for attribute in SAFETY_ATTRIBUTES
-        },
+        {attribute: validation[attribute].to_numpy() >= 0.5 for attribute in SAFETY_ATTRIBUTES},
         maximum_false_acceptance=0.025,
     )
     test_probabilities = predict_probabilities(test)

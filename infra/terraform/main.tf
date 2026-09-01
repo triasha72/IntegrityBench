@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "runtime" {
     resources = ["${aws_s3_bucket.models.arn}/*"]
   }
   statement {
-    actions = ["dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:Scan"]
+    actions   = ["dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:Scan"]
     resources = [aws_dynamodb_table.reviews.arn]
   }
 }
@@ -133,5 +133,5 @@ resource "aws_cloudwatch_metric_alarm" "http_5xx" {
   threshold           = 5
   comparison_operator = "GreaterThanOrEqualToThreshold"
   treat_missing_data  = "notBreaching"
-  dimensions = { ServiceName = aws_apprunner_service.service.service_name }
+  dimensions          = { ServiceName = aws_apprunner_service.service.service_name }
 }
