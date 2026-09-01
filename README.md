@@ -136,6 +136,20 @@ The weak escalation score is retained as a real limitation rather than hidden
 by binary relabeling. The checksummed, text-free experiment record is at
 `artifacts/civil_comments_baseline_v1.json`; source comments are not committed.
 
+### Independent conversational shift check
+
+I evaluated the frozen candidate, without retraining or threshold tuning, on
+the public ToxicChat 0124 test split. After retaining only rows explicitly
+marked as human annotated and deduplicating repeated prompts, 2,802 examples
+remained. The candidate falsely allowed `59.32%` of toxic prompts, rejected
+`2.94%` of safe prompts, and escalated `13.81%` overall.
+
+This is a large domain-transfer failure, not evidence that ToxicChat and Civil
+Comments share the same moderation policy. ToxicChat is CC-BY-NC-4.0 and uses
+binary toxicity labels, so it cannot replace the planned policy-specific
+two-rater study. Source text remains outside Git; the checksummed, text-free
+result is in `artifacts/toxic_chat_external_v1.json`.
+
 Safety-attribute slices are also reported for comments with source annotation
 scores of at least 0.50. False acceptance was 0.1746 on obscene content, 0.2279
 on threats, 0.0929 on insults, 0.0837 on identity attacks, and 0.2066 on

@@ -22,6 +22,13 @@ The generated policy-shift benchmark remains useful for checking whether a
 system follows the current rule. It is a deterministic control, not a substitute
 for real comments.
 
+An external human-reviewed shift check is now complete. On 2,802 deduplicated
+ToxicChat test prompts, the frozen candidate falsely allowed `59.32%` of toxic
+examples. A future candidate must still be selected on Civil Comments
+development data and then evaluated once on the unchanged ToxicChat test set.
+The source's non-commercial license and binary label space remain part of this
+result's boundary.
+
 ## The next experiment
 
 The compact-transformer training path is now implemented for exactly the same
