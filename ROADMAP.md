@@ -41,6 +41,10 @@ After that, two people need to annotate the blinded review set independently.
 Agreement and adjudication will show whether the policy labels themselves are
 clear enough to support a meaningful benchmark.
 
+The combined release gate is implemented and currently blocks the candidate.
+It cannot pass when the external shift result or independent human review is
+missing, even if the in-domain aggregate metrics improve.
+
 ## Work that requires a real operating environment
 
 - Run the stable and candidate models on approved shadow traffic and store only

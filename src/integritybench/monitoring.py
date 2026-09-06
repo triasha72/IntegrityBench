@@ -67,3 +67,50 @@ def assess_civil_comments_release(artifact: dict[str, object]) -> dict[str, obje
             "A production launch also requires human review and live shadow evaluation.",
         ],
     }
+
+
+def assess_complete_release(
+    candidate: dict[str, object],
+    external_shift: dict[str, object] | None,
+    human_agreement: dict[str, object] | None,
+) -> dict[str, object]:
+    """Require model, external-shift, and independent-review evidence together."""
+    model = assess_civil_comments_release(candidate)
+    external_rate = None if external_shift is None else external_shift.get("false_acceptance_rate")
+    human_cases = None if human_agreement is None else human_agreement.get("case_count")
+    human_rate = (
+        None if human_agreement is None else human_agreement.get("decision_and_rule_agreement")
+    )
+    human_adjudication = (
+        None if human_agreement is None else human_agreement.get("requires_adjudication")
+    )
+    checks = {
+        "civil_comments_release": {
+            "value": model["decision"], "required": "approved",
+            "passed": model["decision"] == "approved",
+        },
+        "external_shift_false_acceptance": {
+            "value": external_rate, "maximum": 0.1,
+            "passed": external_rate is not None and external_rate <= 0.1,
+        },
+        "independent_human_review_size": {
+            "value": human_cases, "minimum": 100,
+            "passed": human_cases is not None and human_cases >= 100,
+        },
+        "independent_human_agreement": {
+            "value": human_rate, "minimum": 0.8,
+            "passed": human_rate is not None and human_rate >= 0.8,
+        },
+        "human_disagreements_adjudicated": {
+            "value": human_adjudication, "required": False,
+            "passed": human_adjudication is False,
+        },
+    }
+    return {
+        "schema_version": "1.0",
+        "policy": "integritybench-complete-release-v1",
+        "decision": "approved" if all(item["passed"] for item in checks.values()) else "blocked",
+        "checks": checks,
+        "civil_comments_assessment": model,
+        "non_claim": "A blocked decision is not a production safety claim.",
+    }

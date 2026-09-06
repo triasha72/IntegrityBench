@@ -97,6 +97,22 @@ No human-agreement number is claimed yet. That result will be published only
 after both annotation files are complete and disagreements have been
 adjudicated. See `docs/annotation-guide.md` for the protocol.
 
+The final release check now enforces that boundary in code. It requires the
+Civil Comments safety gates, at most 10% false acceptance on the external shift
+set, at least 100 independently reviewed cases, at least 80% decision-and-rule
+agreement, and completed adjudication. The current combined result is `blocked`:
+the candidate misses two Civil Comments gates, has 59.32% ToxicChat false
+acceptance, and has no completed two-rater record. The full machine-readable
+decision is `artifacts/integritybench_complete_release_v1.json`.
+
+```bash
+PYTHONPATH=src python scripts/assess_complete_release.py \
+  --candidate artifacts/civil_comments_candidate_v2.json \
+  --external-shift artifacts/toxic_chat_external_v1.json \
+  --human-agreement path/to/adjudicated_agreement.json \
+  --output artifacts/integritybench_complete_release_v1.json
+```
+
 ## Transformer comparison
 
 `scripts/train_civil_comments_transformer.py` fine-tunes a compact Hugging Face
