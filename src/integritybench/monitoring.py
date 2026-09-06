@@ -86,23 +86,28 @@ def assess_complete_release(
     )
     checks = {
         "civil_comments_release": {
-            "value": model["decision"], "required": "approved",
+            "value": model["decision"],
+            "required": "approved",
             "passed": model["decision"] == "approved",
         },
         "external_shift_false_acceptance": {
-            "value": external_rate, "maximum": 0.1,
+            "value": external_rate,
+            "maximum": 0.1,
             "passed": external_rate is not None and external_rate <= 0.1,
         },
         "independent_human_review_size": {
-            "value": human_cases, "minimum": 100,
+            "value": human_cases,
+            "minimum": 100,
             "passed": human_cases is not None and human_cases >= 100,
         },
         "independent_human_agreement": {
-            "value": human_rate, "minimum": 0.8,
+            "value": human_rate,
+            "minimum": 0.8,
             "passed": human_rate is not None and human_rate >= 0.8,
         },
         "human_disagreements_adjudicated": {
-            "value": human_adjudication, "required": False,
+            "value": human_adjudication,
+            "required": False,
             "passed": human_adjudication is False,
         },
     }
