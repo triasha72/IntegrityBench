@@ -41,6 +41,10 @@ After that, two people need to annotate the blinded review set independently.
 Agreement and adjudication will show whether the policy labels themselves are
 clear enough to support a meaningful benchmark.
 
+The unpaid-review pilot builder and recruitment guide are complete. The next
+human step is to find two willing reviewers, run the 24-case pilot, and revise
+only unclear instructions before freezing the full study.
+
 The combined release gate is implemented and currently blocks the candidate.
 It cannot pass when the external shift result or independent human review is
 missing, even if the in-domain aggregate metrics improve.

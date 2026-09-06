@@ -87,6 +87,12 @@ does not estimate performance on real moderation traffic.
 
 ## Human-review phase
 
+The [volunteer review guide](docs/UNPAID_REVIEW_STUDY.md) provides a no-budget
+route: a deterministic 24-case pilot, two separate blinded files, plain outreach
+copy, and privacy rules. The pilot is preparation, not evidence. The release
+gate remains blocked until two people finish at least 100 cases and all
+disagreements are adjudicated.
+
 The v0.2 protocol samples 120 blinded cases, balanced across all six slices,
 for two independent annotators. The annotation guide defines evidence,
 escalation, ambiguity, and adjudication rules; the agreement script compares
@@ -165,6 +171,18 @@ Comments share the same moderation policy. ToxicChat is CC-BY-NC-4.0 and uses
 binary toxicity labels, so it cannot replace the planned policy-specific
 two-rater study. Source text remains outside Git; the checksummed, text-free
 result is in `artifacts/toxic_chat_external_v1.json`.
+
+The BeaverTails-330k adapter adds a second human-labelled prompt-response safety
+shift with per-harm-category false acceptance. It keeps source text out of the
+result artifact and records the dataset and model checksums. No BeaverTails
+score is claimed until the frozen model is run against a local JSONL export:
+
+```bash
+PYTHONPATH=src python scripts/evaluate_beavertails.py \
+  --data data/external/beavertails/test.jsonl \
+  --model artifacts/civil_comments_candidate_v2.joblib \
+  --output artifacts/beavertails_external_v1.json
+```
 
 Safety-attribute slices are also reported for comments with source annotation
 scores of at least 0.50. False acceptance was 0.1746 on obscene content, 0.2279
