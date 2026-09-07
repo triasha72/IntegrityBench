@@ -47,6 +47,10 @@ active version.
 
 ## Systems compared
 
+The end-to-end flow is documented in [the system architecture](docs/architecture.md).
+It shows where public datasets enter, where thresholds are fixed, and why a
+failed release gate routes back to error analysis rather than deployment.
+
 1. `PromptOnlySystem` uses a static v1 policy. It is intentionally unable to
    track later rule changes.
 2. `RetrievedPolicySystem` retrieves the current policy before deciding.
