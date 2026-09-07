@@ -18,10 +18,35 @@ from integritybench.beavertails import (
     DATASET_LICENSE,
     normalize_rows,
 )
+from integritybench.thresholds import DecisionThresholds, threshold_predictions
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def predict_decisions(bundle, texts: list[str]) -> np.ndarray:
+    """Use stored three-way thresholds when the model bundle provides them."""
+
+    model = bundle["model"] if isinstance(bundle, dict) else bundle
+    if not hasattr(model, "predict"):
+        raise ValueError("Model artifact does not contain a predictor")
+    if not isinstance(bundle, dict) or "thresholds" not in bundle:
+        return np.asarray(model.predict(texts))
+    thresholds = bundle["thresholds"]
+    if isinstance(thresholds, DecisionThresholds):
+        decision_thresholds = thresholds
+    elif isinstance(thresholds, dict):
+        decision_thresholds = DecisionThresholds(**thresholds)
+    else:
+        raise TypeError("Model thresholds must be a DecisionThresholds value or mapping")
+    classes = list(model.classes_)
+    required = ["ALLOW", "ESCALATE", "REJECT"]
+    if sorted(classes) != required:
+        raise ValueError(f"Three-way model classes must be {required}, got {classes}")
+    probabilities = model.predict_proba(texts)
+    ordered = probabilities[:, [classes.index(label) for label in required]]
+    return threshold_predictions(ordered, decision_thresholds)
 
 
 def main() -> int:
@@ -34,10 +59,7 @@ def main() -> int:
     rows = [json.loads(line) for line in args.data.read_text().splitlines() if line.strip()]
     examples = normalize_rows(rows)
     bundle = joblib.load(args.model)
-    model = bundle["model"] if isinstance(bundle, dict) else bundle
-    if not hasattr(model, "predict"):
-        raise ValueError("Model artifact does not contain a predictor")
-    predicted = np.asarray(model.predict([example.text for example in examples]))
+    predicted = predict_decisions(bundle, [example.text for example in examples])
     expected = np.asarray(["ALLOW" if example.safe else "REJECT" for example in examples])
     labels = ["ALLOW", "ESCALATE", "REJECT"]
     unsafe = expected == "REJECT"
