@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import platform
 from pathlib import Path
 
 import numpy as np
@@ -32,6 +33,22 @@ def hash_model_directory(path: Path) -> str:
         value.update(item.relative_to(path).as_posix().encode())
         value.update(item.read_bytes())
     return value.hexdigest()
+
+
+def runtime_environment(torch_module) -> dict[str, object]:
+    """Record enough runtime detail to distinguish a real GPU run from a fixture."""
+
+    cuda_available = bool(torch_module.cuda.is_available())
+    return {
+        "python": platform.python_version(),
+        "platform": platform.platform(),
+        "torch": str(torch_module.__version__),
+        "cuda_available": cuda_available,
+        "cuda_device_count": int(torch_module.cuda.device_count()) if cuda_available else 0,
+        "cuda_device_name": (
+            str(torch_module.cuda.get_device_name(0)) if cuda_available else None
+        ),
+    }
 
 
 def evaluate(expected: np.ndarray, probabilities: np.ndarray, thresholds) -> dict[str, object]:
@@ -168,6 +185,7 @@ def main() -> int:
         "model": args.model_name,
         "task": "three-way moderation with validation-selected safety thresholds",
         "seed": args.seed,
+        "runtime_environment": runtime_environment(torch),
         "training_rows": len(train),
         "thresholds": thresholds.__dict__,
         "threshold_selection": selection,
