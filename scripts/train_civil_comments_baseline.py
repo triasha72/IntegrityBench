@@ -10,7 +10,6 @@ from itertools import pairwise
 from pathlib import Path
 
 import numpy as np
-import pyarrow.parquet as pq
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix
@@ -30,6 +29,10 @@ SAFETY_ATTRIBUTES = [
 
 
 def read_split(path: Path, limit: int | None, seed: int):
+    # Keep metrics and receipt helpers importable in lightweight development
+    # environments; only an actual parquet training run needs PyArrow.
+    import pyarrow.parquet as pq
+
     frame = pq.read_table(path, columns=["text", "toxicity", *SAFETY_ATTRIBUTES]).to_pandas()
     frame = frame.dropna(subset=["text", "toxicity"])
     frame["label"] = frame.toxicity.map(lambda score: decision_from_toxicity(float(score)).value)
