@@ -45,6 +45,11 @@ The unpaid-review pilot builder and recruitment guide are complete. The next
 human step is to find two willing reviewers, run the 24-case pilot, and revise
 only unclear instructions before freezing the full study.
 
+An alternative public-evidence path is also implemented. It combines Civil
+Comments, ToxicChat, BeaverTails, and a clearly labelled author error audit. It
+can support offline research evidence but cannot be described as independent
+review or production approval.
+
 The combined release gate is implemented and currently blocks the candidate.
 It cannot pass when the external shift result or independent human review is
 missing, even if the in-domain aggregate metrics improve.

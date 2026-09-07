@@ -1,6 +1,7 @@
 from integritybench.monitoring import (
     assess_civil_comments_release,
     assess_complete_release,
+    assess_public_evidence,
     population_stability_index,
 )
 
@@ -48,3 +49,46 @@ def test_complete_release_blocks_missing_human_review_and_external_failure():
     assert result["decision"] == "blocked"
     assert not result["checks"]["external_shift_false_acceptance"]["passed"]
     assert not result["checks"]["independent_human_review_size"]["passed"]
+
+
+def test_public_evidence_uses_three_datasets_without_claiming_independent_review():
+    candidate = {
+        "evaluations": {
+            "test": {
+                "false_acceptance_rate": 0.01,
+                "false_rejection_rate": 0.01,
+                "expected_calibration_error": 0.01,
+                "safety_slices": {
+                    name: {"false_acceptance_rate": 0.01}
+                    for name in ("threat", "identity_attack", "sexual_explicit")
+                },
+            }
+        }
+    }
+    result = assess_public_evidence(
+        candidate,
+        {"false_acceptance_rate": 0.08},
+        {"false_acceptance_rate": 0.09},
+        {"case_count": 50, "complete": True},
+    )
+    assert result["decision"] == "supported"
+    assert "not independent human review" in result["non_claims"][0]
+
+
+def test_public_evidence_blocks_missing_beavertails_result():
+    candidate = {
+        "evaluations": {
+            "test": {
+                "false_acceptance_rate": 0.01,
+                "false_rejection_rate": 0.01,
+                "expected_calibration_error": 0.01,
+                "safety_slices": {
+                    name: {"false_acceptance_rate": 0.01}
+                    for name in ("threat", "identity_attack", "sexual_explicit")
+                },
+            }
+        }
+    }
+    result = assess_public_evidence(candidate, {"false_acceptance_rate": 0.08}, None)
+    assert result["decision"] == "blocked"
+    assert not result["checks"]["beavertails_false_acceptance"]["passed"]

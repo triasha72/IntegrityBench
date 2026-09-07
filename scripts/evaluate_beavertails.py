@@ -58,6 +58,13 @@ def main() -> int:
         "dataset_license": DATASET_LICENSE,
         "evaluation_role": "external_human_labelled_qa_safety_shift",
         "rows": len(examples),
+        "source_annotation_rows": len(rows),
+        "mean_annotations_per_example": float(
+            np.mean([example.annotation_count for example in examples])
+        ),
+        "mean_safe_label_agreement": float(
+            np.mean([example.safe_label_agreement for example in examples])
+        ),
         "source_sha256": sha256(args.data),
         "model_sha256": sha256(args.model),
         "classification_report": classification_report(

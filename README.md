@@ -173,9 +173,13 @@ two-rater study. Source text remains outside Git; the checksummed, text-free
 result is in `artifacts/toxic_chat_external_v1.json`.
 
 The BeaverTails-330k adapter adds a second human-labelled prompt-response safety
-shift with per-harm-category false acceptance. It keeps source text out of the
-result artifact and records the dataset and model checksums. No BeaverTails
-score is claimed until the frozen model is run against a local JSONL export:
+shift with per-harm-category false acceptance. The frozen candidate was run on
+the public test export. Majority aggregation retained 11,088 unique QA pairs
+from 33,396 annotation rows, with 3.01 annotations per pair and 90.77% mean
+safe-label agreement. The model falsely allowed 58.29% of unsafe pairs, rejected
+7.35% of safe pairs, and escalated 28.13% overall. This is another serious
+transfer failure, not a passing result. The text-free evidence is stored in
+`artifacts/beavertails_external_v1.json`.
 
 ```bash
 PYTHONPATH=src python scripts/evaluate_beavertails.py \
@@ -183,6 +187,13 @@ PYTHONPATH=src python scripts/evaluate_beavertails.py \
   --model artifacts/civil_comments_candidate_v2.joblib \
   --output artifacts/beavertails_external_v1.json
 ```
+
+The [public evidence protocol](docs/PUBLIC_EVIDENCE_PROTOCOL.md) combines Civil
+Comments, ToxicChat, BeaverTails, and a disclosed 50-case author error audit.
+This supports an offline research claim without pretending the author audit is
+independent. The current assessment is blocked by the candidate's Civil
+Comments failures, both external false-acceptance rates, and the unfinished
+author audit. The stricter production gate still requires live shadow evidence.
 
 Safety-attribute slices are also reported for comments with source annotation
 scores of at least 0.50. False acceptance was 0.1746 on obscene content, 0.2279

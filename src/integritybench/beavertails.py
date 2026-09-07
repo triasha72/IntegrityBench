@@ -18,12 +18,14 @@ class BeaverTailsExample:
     text: str
     safe: bool
     categories: tuple[str, ...]
+    annotation_count: int
+    safe_label_agreement: float
 
 
 def normalize_rows(rows: Iterable[Mapping[str, Any]]) -> tuple[BeaverTailsExample, ...]:
     """Normalize human-labelled prompt/response pairs without retaining source IDs."""
 
-    examples: dict[str, BeaverTailsExample] = {}
+    grouped: dict[str, list[tuple[bool, tuple[str, ...], str]]] = {}
     for row in rows:
         prompt = str(row.get("prompt", "")).strip()
         response = str(row.get("response", "")).strip()
@@ -39,16 +41,32 @@ def normalize_rows(rows: Iterable[Mapping[str, Any]]) -> tuple[BeaverTailsExampl
         )
         text = f"User: {prompt}\nAssistant: {response}"
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
-        example = BeaverTailsExample(
-            example_id=f"beavertails-330k-{digest}",
-            text=text,
-            safe=bool(row["is_safe"]),
-            categories=categories,
+        grouped.setdefault(digest, []).append((bool(row["is_safe"]), categories, text))
+    examples = []
+    for digest, votes in grouped.items():
+        safe_votes = sum(annotation[0] for annotation in votes)
+        if safe_votes * 2 == len(votes):
+            continue
+        safe = safe_votes * 2 > len(votes)
+        winning_votes = safe_votes if safe else len(votes) - safe_votes
+        category_names = {name for _, categories, _ in votes for name in categories}
+        categories = tuple(
+            sorted(
+                name
+                for name in category_names
+                if sum(name in annotation[1] for annotation in votes) * 2 > len(votes)
+            )
         )
-        previous = examples.get(example.example_id)
-        if previous is not None and previous != example:
-            raise ValueError("Conflicting BeaverTails labels found for repeated content")
-        examples[example.example_id] = example
+        examples.append(
+            BeaverTailsExample(
+                example_id=f"beavertails-330k-{digest}",
+                text=votes[0][2],
+                safe=safe,
+                categories=categories,
+                annotation_count=len(votes),
+                safe_label_agreement=winning_votes / len(votes),
+            )
+        )
     if not examples:
         raise ValueError("No BeaverTails rows found")
-    return tuple(examples.values())
+    return tuple(examples)

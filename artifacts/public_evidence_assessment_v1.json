@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "policy": "integritybench-public-evidence-v1",
+  "decision": "blocked",
+  "checks": {
+    "civil_comments_release": {
+      "value": "rejected",
+      "required": "approved",
+      "passed": false
+    },
+    "toxic_chat_false_acceptance": {
+      "value": 0.5932203389830508,
+      "maximum": 0.1,
+      "passed": false
+    },
+    "beavertails_false_acceptance": {
+      "value": 0.5828998699609883,
+      "maximum": 0.1,
+      "passed": false
+    },
+    "author_error_audit": {
+      "value": null,
+      "minimum": 50,
+      "passed": false
+    }
+  },
+  "civil_comments_assessment": {
+    "schema_version": "1.0",
+    "policy": "civil-comments-release-v1",
+    "decision": "rejected",
+    "checks": {
+      "overall_false_acceptance_rate": {
+        "value": 0.018387553041018388,
+        "maximum": 0.05,
+        "passed": true
+      },
+      "overall_false_rejection_rate": {
+        "value": 0.017146535580524345,
+        "maximum": 0.05,
+        "passed": true
+      },
+      "expected_calibration_error": {
+        "value": 0.053100313634616356,
+        "maximum": 0.05,
+        "passed": false
+      },
+      "threat_false_acceptance_rate": {
+        "value": 0.06046511627906977,
+        "maximum": 0.05,
+        "passed": false
+      },
+      "identity_attack_false_acceptance_rate": {
+        "value": 0.007898894154818325,
+        "maximum": 0.05,
+        "passed": true
+      },
+      "sexual_explicit_false_acceptance_rate": {
+        "value": 0.028169014084507043,
+        "maximum": 0.05,
+        "passed": true
+      }
+    },
+    "required_runtime_monitoring": {
+      "decision_distribution_psi_warning": 0.1,
+      "decision_distribution_psi_block": 0.25
+    },
+    "limitations": [
+      "Approval would apply only to the documented Civil Comments mapping.",
+      "A production launch also requires human review and live shadow evaluation."
+    ]
+  },
+  "claim_scope": "offline research evidence across independently human-labelled public data",
+  "non_claims": [
+    "The author audit is not independent human review.",
+    "This assessment is not production approval."
+  ]
+}
