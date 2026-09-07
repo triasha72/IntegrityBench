@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "PKU-Alignment/BeaverTails",
+  "dataset_config": "330k",
+  "dataset_license": "CC-BY-NC-4.0",
+  "evaluation_role": "external_human_labelled_qa_safety_shift",
+  "rows": 11088,
+  "source_annotation_rows": 33396,
+  "mean_annotations_per_example": 3.011904761904762,
+  "mean_safe_label_agreement": 0.9077165504248838,
+  "source_sha256": "c080da4b2ed83e5e00a1b72494a54872af4da28a92d1d88a7274f78d3c2580bf",
+  "model_sha256": "15cc4cf7a5de697fabb8e5b4530ba0c9795c68bef6014a24b7552aa9a6105c6f",
+  "classification_report": {
+    "ALLOW": {
+      "precision": 0.7811020640030297,
+      "recall": 0.8356969205834684,
+      "f1-score": 0.8074777331897818,
+      "support": 4936.0
+    },
+    "ESCALATE": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "REJECT": {
+      "precision": 0.8603409677974858,
+      "recall": 0.8120936280884266,
+      "f1-score": 0.8355213646625972,
+      "support": 6152.0
+    },
+    "accuracy": 0.82260101010101,
+    "macro avg": {
+      "precision": 0.5471476772668386,
+      "recall": 0.5492635162239651,
+      "f1-score": 0.547666365950793,
+      "support": 11088.0
+    },
+    "weighted avg": {
+      "precision": 0.8250665062959133,
+      "recall": 0.82260101010101,
+      "f1-score": 0.8230372949521159,
+      "support": 11088.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      4125,
+      0,
+      811
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1156,
+      0,
+      4996
+    ]
+  ],
+  "false_acceptance_rate": 0.18790637191157347,
+  "false_rejection_rate": 0.1643030794165316,
+  "escalation_rate": 0.0,
+  "false_acceptance_rate_by_harm_category": {
+    "animal_abuse": 0.20279720279720279,
+    "child_abuse": 0.24489795918367346,
+    "controversial_topics,politics": 0.5137614678899083,
+    "discrimination,stereotype,injustice": 0.29036004645760743,
+    "drug_abuse,weapons,banned_substance": 0.08517887563884156,
+    "financial_crime,property_crime,theft": 0.07747747747747748,
+    "hate_speech,offensive_language": 0.17883211678832117,
+    "misinformation_regarding_ethics,laws_and_safety": 0.6052631578947368,
+    "non_violent_unethical_behavior": 0.21498204207285787,
+    "privacy_violation": 0.11172161172161173,
+    "self_harm": 0.1,
+    "sexually_explicit,adult_content": 0.20833333333333334,
+    "terrorism,organized_crime": 0.05555555555555555,
+    "violence,aiding_and_abetting,incitement": 0.08503515232674924
+  },
+  "contains_source_text": false,
+  "limitations": [
+    "BeaverTails labels concern prompt-response safety, not IntegrityBench rule IDs.",
+    "The CC-BY-NC-4.0 dataset is restricted to non-commercial research use.",
+    "This external benchmark cannot replace two independent policy reviewers."
+  ]
+}

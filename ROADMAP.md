@@ -50,6 +50,12 @@ Comments, ToxicChat, BeaverTails, and a clearly labelled author error audit. It
 can support offline research evidence but cannot be described as independent
 review or production approval.
 
+The BeaverTails-only training experiment is now complete: it lowered held-out
+false acceptance from 58.29% to 18.79%, but raised false rejection to 16.43%
+and has no escalation option. The next model experiment is therefore a
+three-way conversational candidate, selected without using the ToxicChat or
+BeaverTails tests.
+
 The combined release gate is implemented and currently blocks the candidate.
 It cannot pass when the external shift result or independent human review is
 missing, even if the in-domain aggregate metrics improve.

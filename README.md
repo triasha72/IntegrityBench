@@ -192,6 +192,20 @@ PYTHONPATH=src python scripts/evaluate_beavertails.py \
   --output artifacts/beavertails_external_v1.json
 ```
 
+A separate BeaverTails-only binary candidate now has a reproducible training
+path. It uses the official train split and keeps the official test export out
+of training. This will show whether the failure is mostly a mismatch between
+comment-only training data and prompt-response safety data. It cannot replace
+the three-way IntegrityBench moderator because it has no `ESCALATE` class. See
+[the training note](docs/BEAVERTAILS_TRAINING.md) for the exact boundary.
+
+The first run used 99,718 deduplicated official training pairs and the same
+11,088 held-out test pairs. False acceptance fell from `58.29%` to `18.79%`.
+False rejection rose from `7.35%` to `16.43%`, and the binary model never
+escalates. That is useful evidence about the source-format mismatch, but it is
+not a deployable replacement for the three-way candidate. The text-free result
+is `artifacts/beavertails_candidate_external_v1.json`.
+
 The [public evidence protocol](docs/PUBLIC_EVIDENCE_PROTOCOL.md) combines Civil
 Comments, ToxicChat, BeaverTails, and a disclosed 50-case author error audit.
 This supports an offline research claim without pretending the author audit is

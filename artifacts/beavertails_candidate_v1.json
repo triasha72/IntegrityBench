@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "PKU-Alignment/BeaverTails",
+  "dataset_license": "CC-BY-NC-4.0",
+  "model": "character TF-IDF + class-balanced binary logistic regression",
+  "training_rows": 99718,
+  "seed": 42,
+  "train_source_sha256": "12f04c9200000929ebbc616c29cb53331f6df36e7341d73e4a12cffac0eb1c08",
+  "model_sha256": "15cc4cf7a5de697fabb8e5b4530ba0c9795c68bef6014a24b7552aa9a6105c6f",
+  "evaluation_policy": "Use only the official BeaverTails test split in evaluate_beavertails.py.",
+  "contains_source_text": false,
+  "limitations": [
+    "This binary candidate cannot represent IntegrityBench's ESCALATE decision.",
+    "It is a public-domain-shift experiment, not a replacement for policy-specific moderation.",
+    "The CC-BY-NC-4.0 data cannot support a commercial release claim."
+  ]
+}
