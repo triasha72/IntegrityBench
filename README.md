@@ -338,3 +338,9 @@ incident exercises, and cost inputs are in `docs/production-runbook.md`.
 No AWS deployment, uptime, latency, or cost claim is made from this code alone.
 Those results require an account, an approved model, a named environment, and
 retained monitoring evidence.
+
+## Where this stands
+
+The release gates and public evidence checks run locally. I have not marked the
+project complete because independent human review, agreement, and adjudication
+still have to happen.
