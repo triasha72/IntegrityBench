@@ -32,10 +32,11 @@ result's boundary.
 ## The next experiment
 
 The compact-transformer training path is now implemented for exactly the same
-public data and release gates. It still needs a real GPU run and a checked-in
-experiment record. The comparison will not be limited to macro F1; the main
-question is whether it lowers threat false acceptance without creating an
-unreasonable review burden.
+public data and release gates. Its GPU command now fails before training when
+CUDA is unavailable, so a CPU run cannot be mistaken for GPU evidence. It still
+needs a real GPU run and a checked-in experiment record. The comparison will not
+be limited to macro F1; the main question is whether it lowers threat false
+acceptance without creating an unreasonable review burden.
 
 After that, two people need to annotate the blinded review set independently.
 Agreement and adjudication will show whether the policy labels themselves are

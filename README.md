@@ -148,6 +148,10 @@ The training path is ready, but it has not produced a checked-in GPU experiment
 record. No transformer result is claimed until that run finishes and the
 text-free artifact passes the existing release gates.
 
+The GPU command uses `--require-cuda`, which refuses a CPU-only session before
+training starts. The exact data, command, artifacts, and publication checks are
+in [the GPU run guide](docs/TRANSFORMER_GPU_RUN.md).
+
 ## Real-data result: Civil Comments
 
 IntegrityBench now includes a separate real-world track using the CC0

@@ -51,6 +51,15 @@ def runtime_environment(torch_module) -> dict[str, object]:
     }
 
 
+def require_cuda(runtime: dict[str, object]) -> None:
+    """Fail before training when a run is meant to be GPU evidence."""
+    if not runtime["cuda_available"] or not runtime["cuda_device_name"]:
+        raise RuntimeError(
+            "This experiment requires an NVIDIA CUDA GPU. Start a GPU session and retry; "
+            "do not publish a CPU run as GPU evidence."
+        )
+
+
 def evaluate(expected: np.ndarray, probabilities: np.ndarray, thresholds) -> dict[str, object]:
     predicted = threshold_predictions(probabilities, thresholds)
     allowed = expected == "ALLOW"
@@ -82,6 +91,11 @@ def main() -> int:
     parser.add_argument("--epochs", type=float, default=2.0)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--require-cuda",
+        action="store_true",
+        help="fail before training unless an NVIDIA CUDA GPU is available",
+    )
     parser.add_argument("--model-output", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -96,6 +110,10 @@ def main() -> int:
         TrainingArguments,
         set_seed,
     )
+
+    runtime = runtime_environment(torch)
+    if args.require_cuda:
+        require_cuda(runtime)
 
     label_to_id = {label: index for index, label in enumerate(LABELS)}
     set_seed(args.seed)
@@ -185,7 +203,7 @@ def main() -> int:
         "model": args.model_name,
         "task": "three-way moderation with validation-selected safety thresholds",
         "seed": args.seed,
-        "runtime_environment": runtime_environment(torch),
+        "runtime_environment": runtime,
         "training_rows": len(train),
         "thresholds": thresholds.__dict__,
         "threshold_selection": selection,
