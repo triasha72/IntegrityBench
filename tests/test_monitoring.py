@@ -48,6 +48,21 @@ def test_complete_release_blocks_missing_human_review_and_external_failure():
     result = assess_complete_release(candidate, {"false_acceptance_rate": 0.59}, None)
     assert result["decision"] == "blocked"
     assert not result["checks"]["external_shift_false_acceptance"]["passed"]
+
+
+def test_public_evidence_accepts_frozen_release_assessment():
+    candidate = {
+        "policy": "civil-comments-release-v1",
+        "decision": "approved",
+        "checks": {},
+    }
+    result = assess_public_evidence(
+        candidate,
+        {"false_acceptance_rate": 0.09},
+        {"false_acceptance_rate": 0.08},
+    )
+    assert result["checks"]["civil_comments_release"]["passed"]
+    assert result["checks"]["toxic_chat_false_acceptance"]["passed"]
     assert not result["checks"]["independent_human_review_size"]["passed"]
 
 

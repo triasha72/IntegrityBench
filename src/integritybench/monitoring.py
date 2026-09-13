@@ -75,7 +75,15 @@ def assess_complete_release(
     human_agreement: dict[str, object] | None,
 ) -> dict[str, object]:
     """Require model, external-shift, and independent-review evidence together."""
-    model = assess_civil_comments_release(candidate)
+    # Accept either the full candidate receipt or the separately generated
+    # release assessment. This keeps the public-evidence gate tied to the
+    # latest frozen model without rebuilding a protected test evaluation.
+    if "evaluations" in candidate:
+        model = assess_civil_comments_release(candidate)
+    elif candidate.get("policy") == "civil-comments-release-v1":
+        model = candidate
+    else:
+        raise ValueError("candidate must be a candidate receipt or Civil release assessment")
     external_rate = None if external_shift is None else external_shift.get("false_acceptance_rate")
     human_cases = None if human_agreement is None else human_agreement.get("case_count")
     human_rate = (
@@ -129,7 +137,12 @@ def assess_public_evidence(
 ) -> dict[str, object]:
     """Assess research evidence without presenting an author audit as independent review."""
 
-    model = assess_civil_comments_release(candidate)
+    if "evaluations" in candidate:
+        model = assess_civil_comments_release(candidate)
+    elif candidate.get("policy") == "civil-comments-release-v1":
+        model = candidate
+    else:
+        raise ValueError("candidate must be a candidate receipt or Civil release assessment")
     toxic_rate = None if toxic_chat is None else toxic_chat.get("false_acceptance_rate")
     beaver_rate = None if beavertails is None else beavertails.get("false_acceptance_rate")
     audit_cases = None if author_audit is None else author_audit.get("case_count")

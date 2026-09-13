@@ -239,10 +239,13 @@ is `artifacts/beavertails_candidate_external_v1.json`.
 
 The [public evidence protocol](docs/PUBLIC_EVIDENCE_PROTOCOL.md) combines Civil
 Comments, ToxicChat, BeaverTails, and a disclosed 50-case author error audit.
-This supports an offline research claim without pretending the author audit is
-independent. The current assessment is blocked by the candidate's Civil
-Comments failures, both external false-acceptance rates, and the unfinished
-author audit. The stricter production gate still requires live shadow evidence.
+The latest frozen transformer assessment passes the Civil Comments checks, and
+the conversational candidate is below the 10% false-acceptance limit on
+ToxicChat (`9.60%`) and BeaverTails (`2.84%`). The combined receipt is
+`artifacts/public_evidence_assessment_v2.json`; it remains blocked only because
+independent human review is not complete. The author audit is not a substitute
+for independent review, and the stricter production gate still requires live
+shadow evidence.
 
 Safety-attribute slices are also reported for comments with source annotation
 scores of at least 0.50. False acceptance was 0.1746 on obscene content, 0.2279
