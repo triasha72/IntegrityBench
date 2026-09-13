@@ -16,7 +16,21 @@ than sending an ambiguous comment to review, so the release checks include
 false acceptance, false rejection, calibration, threat performance, and the
 rate at which work is passed to a person.
 
-## Project story
+## System architecture
+
+```text
+Policy registry + moderation request
+        ↓
+Policy retrieval and reranking
+        ↓
+Structured ALLOW / REJECT / ESCALATE decision
+        ↓
+Evidence, threshold, calibration, and safety checks
+        ↓
+Model registry, review queue, shadow comparison, and rollback records
+```
+
+## Background
 
 **Situation.** A moderation model can look accurate while still allowing a
 dangerous share of harmful comments. Policies also change, and some comments are
