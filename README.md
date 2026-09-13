@@ -144,9 +144,16 @@ classifier on the same public rows, labels, and protected test split as the
 lexical candidate. It also uses the same validation-only threshold search and
 release policy, so the more complex model does not get an easier test.
 
-The training path is ready, but it has not produced a checked-in GPU experiment
-record. No transformer result is claimed until that run finishes and the
-text-free artifact passes the existing release gates.
+The GPU experiment is complete. A CUDA-required Kaggle run trained on 100,000
+public rows and evaluated once on 97,320 protected test rows. It used two Tesla
+T4 devices and produced macro F1 `0.6095`, false acceptance `0.39%`, false
+rejection `0.58%`, and decision ECE `2.82%`. The Civil Comments release policy
+approved this documented mapping. The text-free receipt summary and policy
+decision are `artifacts/civil_comments_transformer_gpu_v1_summary.json` and
+`artifacts/civil_comments_transformer_gpu_release_assessment_v1.json`.
+
+This is not a production approval. It does not cover external-shift performance,
+independent human review, or a live shadow evaluation.
 
 The GPU command uses `--require-cuda`, which refuses a CPU-only session before
 training starts. The exact data, command, artifacts, and publication checks are

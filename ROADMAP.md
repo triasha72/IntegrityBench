@@ -31,12 +31,12 @@ result's boundary.
 
 ## The next experiment
 
-The compact-transformer training path is now implemented for exactly the same
-public data and release gates. Its GPU command now fails before training when
-CUDA is unavailable, so a CPU run cannot be mistaken for GPU evidence. It still
-needs a real GPU run and a checked-in experiment record. The comparison will not
-be limited to macro F1; the main question is whether it lowers threat false
-acceptance without creating an unreasonable review burden.
+The compact-transformer GPU run is complete. It used two Tesla T4 devices,
+100,000 training rows, and the protected 97,320-row test split. Its Civil
+Comments policy assessment passed, including a `1.40%` threat false-acceptance
+rate. The checked-in text-free summary and assessment keep the run auditable.
+The remaining question is external-shift behavior, not a second run on this
+protected test split.
 
 After that, two people need to annotate the blinded review set independently.
 Agreement and adjudication will show whether the policy labels themselves are

@@ -1,0 +1,43 @@
+{
+  "evidence_type": "text-free GPU run receipt summary",
+  "source": "Kaggle notebook: IntegrityBench — CUDA Transformer Evidence",
+  "model": "distilbert-base-uncased",
+  "runtime_environment": {
+    "python": "3.12.13",
+    "platform": "Linux-6.12.90+-x86_64-with-glibc2.35",
+    "torch": "2.10.0+cu128",
+    "cuda_available": true,
+    "cuda_device_count": 2,
+    "cuda_device_name": "Tesla T4"
+  },
+  "data": {
+    "training_rows": 100000,
+    "test_rows": 97320,
+    "contains_source_text": false,
+    "manifest_sha256": {
+      "train": "c20f01c3aecbdd942886cacb0ee67e995df33bc712a622fde75927ed3d6ccefe",
+      "validation": "2e0eb65474e7e1290df8689fc93eea783160c898c09ae15382c0a9662367bd03",
+      "test": "410f803ff161e7c4ba005db7de5b444cac413f4861bf056b0fd69d670d75aa08"
+    }
+  },
+  "threshold_selection": {
+    "feasible_candidates": 104,
+    "validation_macro_f1": 0.6051092792152885,
+    "validation_false_acceptance_rate": 0.0031426775612822125
+  },
+  "test": {
+    "accuracy": 0.6027846280312371,
+    "macro_f1": 0.6095296092122545,
+    "false_acceptance_rate": 0.0038575286100038576,
+    "false_rejection_rate": 0.005822799625468165,
+    "expected_calibration_error": 0.028235102815349137,
+    "escalation_rate": 0.522996300863132,
+    "safety_slice_false_acceptance_rate": {
+      "obscene": 0.011385199240986717,
+      "threat": 0.013953488372093023,
+      "insult": 0.0022964140611199434,
+      "identity_attack": 0.001579778830963665,
+      "sexual_explicit": 0.009389671361502348
+    }
+  }
+}
