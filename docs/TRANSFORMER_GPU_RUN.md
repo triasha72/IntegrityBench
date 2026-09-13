@@ -50,3 +50,17 @@ Before committing the text-free JSON, confirm all of the following:
 Then run the existing Civil Comments release assessment. A passing training job
 does not make the model releasable: the safety, external-shift, and human-review
 gates remain independent.
+
+## External-shift check
+
+Use the frozen model directory and its saved thresholds to evaluate ToxicChat.
+This command does not train the model or choose thresholds again:
+
+```bash
+PYTHONPATH=src python scripts/evaluate_toxic_chat_transformer.py \
+  --data path/to/toxicchat_human_annotated_test.csv \
+  --model /tmp/integritybench-transformer-model \
+  --output artifacts/civil_comments_transformer_toxicchat_external_v1.json
+```
+
+Keep the source CSV out of Git. Commit only the text-free evaluation receipt.
