@@ -25,3 +25,23 @@ The reported model is binary, so it cannot be promoted as the three-way
 IntegrityBench moderator. Its purpose is to measure whether the large transfer
 failure came from using a comment-only source or from a broader safety-modeling
 gap.
+
+## Cross-domain transformer development run
+
+`train_conversational_transformer.py` trains on Civil Comments training rows
+and the BeaverTails training export. It selects thresholds on Civil Comments
+validation only. It intentionally accepts no Civil Comments or BeaverTails test
+file, so this development run cannot spend a protected test split.
+
+```bash
+PYTHONPATH=src python scripts/train_conversational_transformer.py \
+  --civil-train data/external/civil-comments/train.parquet \
+  --civil-validation data/external/civil-comments/validation.parquet \
+  --beavertails-train data/external/beavertails/train.jsonl.xz \
+  --model-output /tmp/integritybench-conversational-transformer \
+  --output artifacts/conversational_transformer_development_v1.json \
+  --require-cuda
+```
+
+Treat the result as development evidence only. Pick at most one frozen model
+before using a held-out external test.
