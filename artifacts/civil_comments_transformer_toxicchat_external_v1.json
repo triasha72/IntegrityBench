@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "lmsys/toxic-chat",
+  "dataset_version": "0124",
+  "dataset_license": "CC-BY-NC-4.0",
+  "evaluation_role": "external_human_reviewed_distribution_shift",
+  "model_type": "transformer",
+  "rows": 2802,
+  "source_sha256": "3c2e49889626f7738dca0a29bface0ba0a0595b2ffdd17f0e02f19df7c3c4c9b",
+  "model_sha256_tree": "2c96a66bfc5dc25e2356e4e83c89d7e15dc93ead247fdb9a7f74d9cb9619a780",
+  "classification_report": {
+    "ALLOW": {"precision": 0.9627630868861305, "recall": 0.7287581699346405, "f1-score": 0.8295745175540572, "support": 2448.0},
+    "ESCALATE": {"precision": 0.0, "recall": 0.0, "f1-score": 0.0, "support": 0.0},
+    "REJECT": {"precision": 0.6, "recall": 0.1016949152542373, "f1-score": 0.17391304347826086, "support": 354.0},
+    "accuracy": 0.6495360456816559,
+    "macro avg": {"precision": 0.5209210289620435, "recall": 0.2768176950629593, "f1-score": 0.3344958536774394, "support": 2802.0},
+    "weighted avg": {"precision": 0.9169322043887393, "recall": 0.6495360456816559, "f1-score": 0.7467393420284213, "support": 2802.0}
+  },
+  "confusion_matrix": [[1784, 640, 24], [0, 0, 0], [69, 249, 36]],
+  "false_acceptance_rate": 0.19491525423728814,
+  "false_rejection_rate": 0.00980392156862745,
+  "escalation_rate": 0.3172733761598858,
+  "contains_source_text": false,
+  "limitations": [
+    "ToxicChat is conversational toxicity evidence, not a substitute for policy-specific human adjudication.",
+    "The CC-BY-NC-4.0 source limits this track to non-commercial research use.",
+    "Binary ToxicChat labels cannot validate IntegrityBench's three-way escalation policy directly."
+  ]
+}

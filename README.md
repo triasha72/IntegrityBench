@@ -152,8 +152,14 @@ approved this documented mapping. The text-free receipt summary and policy
 decision are `artifacts/civil_comments_transformer_gpu_v1_summary.json` and
 `artifacts/civil_comments_transformer_gpu_release_assessment_v1.json`.
 
-This is not a production approval. It does not cover external-shift performance,
-independent human review, or a live shadow evaluation.
+On the untouched 2,802-row human-reviewed ToxicChat test set, this frozen model
+had `19.49%` false acceptance, `0.98%` false rejection, and `31.73%`
+escalation. That improves on the older candidate but still misses the `10%`
+external-shift release limit. The text-free receipt is
+`artifacts/civil_comments_transformer_toxicchat_external_v1.json`.
+
+This is not a production approval. The external-shift gate still fails, and
+independent human review and a live shadow evaluation remain incomplete.
 
 The GPU command uses `--require-cuda`, which refuses a CPU-only session before
 training starts. The exact data, command, artifacts, and publication checks are

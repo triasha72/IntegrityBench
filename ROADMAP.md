@@ -35,8 +35,11 @@ The compact-transformer GPU run is complete. It used two Tesla T4 devices,
 100,000 training rows, and the protected 97,320-row test split. Its Civil
 Comments policy assessment passed, including a `1.40%` threat false-acceptance
 rate. The checked-in text-free summary and assessment keep the run auditable.
-The remaining question is external-shift behavior, not a second run on this
-protected test split.
+The external-shift check is also complete. On 2,802 untouched human-reviewed
+ToxicChat rows, false acceptance was `19.49%`. That is better than the older
+candidate's `59.32%`, but it misses the `10%` release limit. The next model
+iteration must improve that external behavior without rerunning the protected
+Civil Comments test split.
 
 After that, two people need to annotate the blinded review set independently.
 Agreement and adjudication will show whether the policy labels themselves are
